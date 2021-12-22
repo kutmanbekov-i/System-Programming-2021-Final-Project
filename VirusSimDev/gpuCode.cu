@@ -126,7 +126,9 @@ __global__ void recoverStage(int* stage, int infectPeriod, int sizePopulation){
 
   if (tid < sizePopulation){
     if(stage[tid] > 0 && stage[tid] < 100){ // if in infectious stage
+
       if(stage[tid] >= infectPeriod) stage[tid] = 100; // if done with infectious stage, move to recovery stage (stage 100)
+
       else stage[tid] += 1; // increment day by 1
     }
   }
@@ -147,6 +149,7 @@ __global__ void whoDies(int* stage, curandState* gRand, float* susc, int sizePop
       if(stage[tid] > 107) stage[tid] = 200; // if made it past last day of recovery, immune
       if(stage[tid] == 107){  // if on last day of recovery, decide if live or die
 
+
         // generate noise
         localState = gRand[tid];
         theRand = curand_uniform(&localState); // value between 0-1
@@ -154,6 +157,7 @@ __global__ void whoDies(int* stage, curandState* gRand, float* susc, int sizePop
 
         if(theRand < susc[tid]) stage[tid] = -1;
         if(theRand < susc[tid]) stage[tid] = -1;
+
         // if(theRand < 1.0) stage[tid] = -1;
       }
     }
