@@ -170,7 +170,7 @@ int runVS(AParams* PARAMS){
 
      for (int i = 0; i < PARAMS->sizePopulation; i++) {
        if(stageMap[i] > 0 && stageMap[i] < 100) numInfected++;
-       if(stageMap[i] == -1) numDead += 0.5;
+       if(stageMap[i] == -1) numDead += 1;  // must be whole person instead of half (0.5)
 
     }
 

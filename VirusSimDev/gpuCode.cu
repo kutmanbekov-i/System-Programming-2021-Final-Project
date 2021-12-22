@@ -146,8 +146,8 @@ __global__ void whoDies(int* stage, curandState* gRand, float* susc, int sizePop
   if (tid < sizePopulation){
     if(stage[tid] >= 100 && stage[tid] < 200){ // if in recovery
       stage[tid] += 1; // increment day
-      if(stage[tid] > 107) stage[tid] = 200; // if made it past last day of recovery, immune
-      if(stage[tid] == 107){  // if on last day of recovery, decide if live or die
+      if(stage[tid] > 140) stage[tid] = 200; // if made it past last day of recovery, immune
+      if(stage[tid] == 140){  // if on last day of recovery, decide if live or die
 
 
         // generate noise
@@ -188,7 +188,9 @@ __global__ void mingle(int* stage, int* ming, float spreadrate, int duration,
       theRand = curand_uniform(&localState); // value between 0-1
       gRand[tid] = localState;
       // nX = floor(theRand * 1024.0);
-      nX = x + floor(((theRand <= 0.5 ? -1 : 1) * theRand) * 10);
+      nX = x + floor(((theRand <= 0.5 ? -1 : 1) * theRand) * 3);
+      // nX = x + floor(((curand_uniform(&localState) <= 0.5 ? -1 : 1) * theRand) * 10);
+
 
       // printf("%.f\n", curand_uniform(&localState));
 
@@ -197,7 +199,8 @@ __global__ void mingle(int* stage, int* ming, float spreadrate, int duration,
       gRand[tid] = localState;
       // nY = floor(theRand * 1024.0);
       // nY = y +1;
-      nY = y + floor(((theRand <= 0.5 ? -1 : 1) * theRand) * 10);
+      nY = y + floor(((theRand <= 0.5 ? -1 : 1) * theRand) * 3); // the less the radius, the more logicaly the spread of infection
+      // nY = y + floor(((curand_uniform(&localState) <= 0.5 ? -1 : 1) * theRand) * 10);
 
       neighborStage = tex2D(texStage, nX, nY);
 
@@ -222,19 +225,20 @@ __global__ void drawStage(float* red, float* green, float* blue,
   int tid = x + (y * blockDim.x * gridDim.x);
 
   if (tid < sizePopulation){
-    if (stage[tid] == 0) {  // if not infected, draw as white
+    if(stage[tid] == 0)
+    {
       red[tid] = 1;
       green[tid] = 1;
       blue[tid] = 1;
-      }
+    }
     else if (stage[tid] == -1) {  // if dead, draw in black
       red[tid] = 0.0;
       green[tid] = 0.0;
       blue[tid] = 0.0;
       }
     else if (stage[tid] < 100) { // if in infectious stage, draw as red
-      red[tid] = 1.0;
-      green[tid] = 0.0;
+      red[tid] = 1;
+      green[tid] = 0.5;
       blue[tid] = 0.0;
       }
     else if (stage[tid] < 200) { // if in recovery stage, draw as green
@@ -243,9 +247,9 @@ __global__ void drawStage(float* red, float* green, float* blue,
       blue[tid] = 0.0;
       }
     else if (stage[tid] < 300) { // if in immune, draw as blue
-      red[tid] = 0.0;
-      green[tid] = 0.0;
-      blue[tid] = 1.0;
+      red[tid] = 0.15;
+      green[tid] = 0.15;
+      blue[tid] = 0.7;
       }
     }
 }
