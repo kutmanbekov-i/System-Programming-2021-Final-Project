@@ -95,8 +95,8 @@ int setDefaults(AParams *PARAMS){
 		// for runmode = 2 (virus spread simulator)
 		PARAMS->sizePopulation = 1024*1024; // = 1,048,576
 	  PARAMS->deadliness = 0.05; // 0 to 1;
-	  PARAMS->duration = 7; // number of days a person is infectious before symptoms
-	  PARAMS->spreadrate = 0.1;	// 0 to 1
+	  PARAMS->duration = 50; // number of days a person is infectious before symptoms
+	  PARAMS->spreadrate = 0.05;	// 0 to 1
 		// ADD MORE PARAMETERS HERE AND IN PARAMS.H AS NEEDED, ADD TO INTERFACE
 
     return 0;

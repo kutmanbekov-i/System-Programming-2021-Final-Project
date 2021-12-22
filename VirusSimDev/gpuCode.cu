@@ -186,6 +186,8 @@ __global__ void mingle(int* stage, int* ming, float spreadrate, int duration,
       // nX = floor(theRand * 1024.0);
       nX = x + floor(((theRand <= 0.5 ? -1 : 1) * theRand) * 10);
 
+      // printf("%.f\n", curand_uniform(&localState));
+
       localState = gRand[tid];
       theRand = curand_uniform(&localState);
       gRand[tid] = localState;
@@ -217,9 +219,9 @@ __global__ void drawStage(float* red, float* green, float* blue,
 
   if (tid < sizePopulation){
     if (stage[tid] == 0) {  // if not infected, draw as white
-      red[tid] = 1.0;
-      green[tid] = 1.0;
-      blue[tid] = 1.0;
+      red[tid] = 1;
+      green[tid] = 1;
+      blue[tid] = 1;
       }
     else if (stage[tid] == -1) {  // if dead, draw in black
       red[tid] = 0.0;

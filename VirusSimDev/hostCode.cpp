@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <math.h>
 #include <thread>
-#include <random.h>
 
 #include "hostCode.h"
 #include "gpuCode.h"
@@ -155,9 +154,6 @@ int runVS(AParams* PARAMS){
 
   int numDead;
   int numInfected;
-  int numRecovered = 0;
-  int lastinfected = 0;
-int lastDead = 0;
 
   // simulation runs for 10 years, updating population once per day:
   for(int day = 0; day < 3650; day++){
@@ -174,19 +170,11 @@ int lastDead = 0;
 
      for (int i = 0; i < PARAMS->sizePopulation; i++) {
        if(stageMap[i] > 0 && stageMap[i] < 100) numInfected++;
-       if(stageMap[i] == -1) numDead += 1;
+       if(stageMap[i] == -1) numDead += 0.5;
 
     }
-    // if(lastinfected > numInfected)
-        // numRecovered = (lastinfected - numInfected) - (lastDead - numDead);
-    (numInfected)
 
-    lastinfected = numInfected;
-    lastDead = numDead;
-
-      // numRecovered = ;
-
-     printf("%d\t%d\t\t%d\t\t%d\n", day, numDead, numInfected, numRecovered);
+     printf("%d\t%d\t\t%d\n", day, numDead, numInfected);
    	}
 }
 
