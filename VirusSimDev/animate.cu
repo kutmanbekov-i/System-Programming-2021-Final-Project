@@ -140,7 +140,7 @@ void CPUAnimBitmap::initAnimation() {
   glutInit(&c, &dummy);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
   glutInitWindowSize(width, height);
-  glutCreateWindow("IxenRustamMirlanTalgat");
+  glutCreateWindow("Virus Spreading Simulation");
   // glutKeyboardFunc(Key);
   glutDisplayFunc(Draw);
   if (clickDrag != NULL) glutMouseFunc(mouse_func);
