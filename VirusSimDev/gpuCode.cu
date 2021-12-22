@@ -233,8 +233,8 @@ __global__ void drawStage(float* red, float* green, float* blue,
       blue[tid] = 0.0;
       }
     else if (stage[tid] < 100) { // if in infectious stage, draw as red
-      red[tid] = 1.0;
-      green[tid] = 0.0;
+      red[tid] = 1;
+      green[tid] = 0.5;
       blue[tid] = 0.0;
       }
     else if (stage[tid] < 200) { // if in recovery stage, draw as green
@@ -243,9 +243,9 @@ __global__ void drawStage(float* red, float* green, float* blue,
       blue[tid] = 0.0;
       }
     else if (stage[tid] < 300) { // if in immune, draw as blue
-      red[tid] = 0.0;
-      green[tid] = 0.0;
-      blue[tid] = 1.0;
+      red[tid] = 0.15;
+      green[tid] = 0.15;
+      blue[tid] = 0.7;
       }
     }
 }
