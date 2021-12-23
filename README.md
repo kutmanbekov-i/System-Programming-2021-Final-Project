@@ -24,7 +24,7 @@ For the final project, we modeled the simulation of virus spreading based on the
  
 
 The image below is the screenshot of the running program with the realistic model of virus spreading:
-![alt text](https://github.com/kutmanbekov-i/System-Programming-2021-Final-Project/tree/main/VirusSimDev/Screenshot from 2021-12-23 16-16-18.png?raw=true)
+![alt text](https://github.com/kutmanbekov-i/System-Programming-2021-Final-Project/VirusSimDev/image.png?raw=true)
 
 
 You can find our working repository by following the link below:
